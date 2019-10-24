@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Commands;
+namespace App\Commands\Make;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\File;
 use LaravelZero\Framework\Commands\Command;
 
-class Make_controller extends Command
+class Controller extends Command
 {
     /**
      * The signature of the command.
