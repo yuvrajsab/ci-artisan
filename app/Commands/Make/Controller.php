@@ -32,7 +32,17 @@ class Controller extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $argv = explode('/', $this->argument('name'));
+        $name = array_pop($argv);
+
+        $path = config('settings.controllers_path');
+        for ($i=0; $i < sizeof($argv); $i++) { 
+            if (! File::exists($path.'/'.$argv[$i])) {
+                File::makeDirectory($path.'/'.$argv[$i]);
+            }
+            $path .= '/'.$argv[$i];
+        }
+        
         $baseclass = $this->option('extends') ?? config('settings.base_controller');
 
         if ($this->option('resource')) {
@@ -78,7 +88,7 @@ class $name extends $baseclass {
     }
 }
 EOF;
-        }else{
+        } else {
             $content = <<<EOF
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -92,8 +102,13 @@ class $name extends $baseclass {
 }
 EOF;
         }
-        File::put(config('settings.controllers_path').$name.'.php', $content);
-        $this->info("$name controller successfully created");
+
+        $result = File::put($path.'/'.$name.'.php', $content);
+        if ($result) {
+            $this->info("$name controller successfully created");
+        } else {
+            $this->error("Error occurred");
+        }
     }
 
     /**
