@@ -32,7 +32,7 @@ class Serve extends Command
     public function handle()
     {
         // checking if anything available to serve
-        if (! File::exists(config('settings.entry'))) {
+        if (! File::exists(config('settings.entry_point'))) {
             $this->error('no entry point');
             return;
         }
