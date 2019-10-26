@@ -15,8 +15,7 @@ class Controller extends Command
      */
     protected $signature = 'make:controller 
                             {name : The name of the class}
-                            {--extends= : The name of the base class.}
-                            {--resource : Generate a resource controller class.}';
+                            {--resource : Generate a resource controller class}';
 
     /**
      * The description of the command.
@@ -36,14 +35,14 @@ class Controller extends Command
         $name = array_pop($argv);
 
         $path = config('settings.controllers_path');
-        for ($i=0; $i < sizeof($argv); $i++) { 
+        for ($i=0; $i < sizeof($argv); $i++) {
             if (! File::exists($path.'/'.$argv[$i])) {
                 File::makeDirectory($path.'/'.$argv[$i]);
             }
             $path .= '/'.$argv[$i];
         }
         
-        $baseclass = $this->option('extends') ?? config('settings.base_controller');
+        $baseclass = config('settings.base_controller');
 
         if ($this->option('resource')) {
             $content = <<<EOF
