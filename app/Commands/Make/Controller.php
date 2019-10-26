@@ -140,7 +140,7 @@ EOF;
 
         $result = File::put($path.'/'.$name.'.php', $content);
         if ($result) {
-            $this->info("$name controller successfully created");
+            $this->info("Controller created successfully");
         } else {
             $this->error("Error occurred");
         }
