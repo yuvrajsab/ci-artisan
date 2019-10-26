@@ -49,39 +49,78 @@ class Controller extends Command
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class $name extends $baseclass {
-
+class $name extends $baseclass
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
     public function index()
     {
         //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function create()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
     public function store()
     {
         //
     }
 
-    public function show()
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  \$id
+     * @return Response
+     */
+    public function show(\$id)
     {
         //
     }
 
-    public function edit()
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  \$id
+     * @return Response
+     */
+    public function edit(\$id)
     {
         //
     }
 
-    public function update()
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  \$id
+     * @return Response
+     */
+    public function update(\$id)
     {
         //
     }
 
-    public function destroy()
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  \$id
+     * @return Response
+     */
+    public function destroy(\$id)
     {
         //
     }
@@ -92,12 +131,9 @@ EOF;
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class $name extends $baseclass {
-    
-    public function index()
-    {
-        //
-    }
+class $name extends $baseclass
+{
+    //
 }
 EOF;
         }
