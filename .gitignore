@@ -2,6 +2,7 @@
 /.idea
 /.vscode
 /.vagrant
-/application
+/application/controllers/*
+/application/models/*
 /.env
 /.phpunit*
