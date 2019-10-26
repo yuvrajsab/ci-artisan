@@ -10,8 +10,10 @@ class MakeControllerCommandTest extends TestCase
     public function testMakeControllerCommandWithoutResource()
     {
         $this->artisan('make:controller', ['name' => 'TestController'])
-            ->expectsOutput('Controller created successfully')
-            ->assertExitCode(0);
+        ->expectsOutput('Controller created successfully')
+        ->assertExitCode(0);
+
+        $this->assertFileExists(config('settings.controllers_path').'/TestController.php');
     }
 
     public function testMakeControllerCommandWithResource()
@@ -19,5 +21,16 @@ class MakeControllerCommandTest extends TestCase
         $this->artisan('make:controller', ['name' => 'TestController', 'resource'])
             ->expectsOutput('Controller created successfully')
             ->assertExitCode(0);
+
+        $this->assertFileExists(config('settings.controllers_path').'/TestController.php');        
+    }
+
+    public function testMakeControllerCommandWithinDirectory()
+    {
+        $this->artisan('make:controller', ['name' => 'Directory/TestController', 'resource'])
+            ->expectsOutput('Controller created successfully')
+            ->assertExitCode(0);
+
+        $this->assertFileExists(config('settings.controllers_path').'Directory/TestController.php');        
     }
 }
