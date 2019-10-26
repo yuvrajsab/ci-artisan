@@ -39,10 +39,16 @@ class Serve extends Command
 
         $host = $this->option('host') ?? '127.0.0.1';
         $port = $this->option('port') ?? 8000;
-        for ($i=0; $i < 100; $i++) { 
+
+        if ($this->option('host') != null || $this->option('port') != null) {
             $this->line("Codeigniter development server started: <http://$host:$port>");
             shell_exec("php -S $host:$port");
-            $port++;
+        } else {
+            for ($i=0; $i < 100; $i++) { 
+                $this->line("Codeigniter development server started: <http://$host:$port>");
+                shell_exec("php -S $host:$port");
+                $port++;
+            }
         }
     }
 
