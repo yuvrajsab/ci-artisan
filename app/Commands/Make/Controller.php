@@ -42,101 +42,16 @@ class Controller extends Command
             $path .= '/'.$argv[$i];
         }
         
-        $baseclass = config('settings.base_controller');
+        $base_controller = config('settings.base_controller');
 
         if ($this->option('resource')) {
-            $content = <<<EOF
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class $name extends $baseclass
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  \$id
-     * @return Response
-     */
-    public function show(\$id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  \$id
-     * @return Response
-     */
-    public function edit(\$id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  \$id
-     * @return Response
-     */
-    public function update(\$id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  \$id
-     * @return Response
-     */
-    public function destroy(\$id)
-    {
-        //
-    }
-}
-EOF;
+            $content = File::get(base_path('stubs/controller/resource_controller_template.php'));
         } else {
-            $content = <<<EOF
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class $name extends $baseclass
-{
-    //
-}
-EOF;
+            $content = File::get(base_path('stubs/controller/simple_controller_template.php'));
         }
+
+        $content = str_replace('{$controller_name}', $name, $content);
+        $content = str_replace('{$base_controller}', $base_controller, $content);
 
         $result = File::put($path.'/'.$name.'.php', $content);
         if ($result) {
