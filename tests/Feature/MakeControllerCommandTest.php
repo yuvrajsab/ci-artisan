@@ -11,7 +11,6 @@ class MakeControllerCommandTest extends TestCase
     public function testMakeControllerCommandWithoutResource()
     {
         $controller_name = 'TestController';
-        $base_controller = config('settings.base_controller');
 
         $this->artisan('make:controller', ['name' => $controller_name])
         ->expectsOutput('Controller created successfully')
@@ -21,19 +20,12 @@ class MakeControllerCommandTest extends TestCase
 
         $content = File::get(config('settings.controllers_path')."/$controller_name.php");
         
-        $check = false;
-
-        if (strpos($content, $controller_name) !== false && strpos($content, $base_controller) !== false) {
-            $check = true;
-        }
-
-        $this->assertTrue($check);
+        $this->assertStringContainsString($controller_name, $content);
     }
 
     public function testMakeControllerCommandWithResource()
     {
         $controller_name = 'TestController';
-        $base_controller = config('settings.base_controller');
 
         $this->artisan('make:controller', ['name' => $controller_name, '--resource' => true])
         ->expectsOutput('Controller created successfully')
@@ -43,15 +35,8 @@ class MakeControllerCommandTest extends TestCase
 
         $content = File::get(config('settings.controllers_path')."/$controller_name.php");
         
-        $check = false;
-
-        if (strpos($content, $controller_name) !== false && 
-            strpos($content, $base_controller) !== false &&
-            strpos($content, 'public function index()') !== false) {
-            $check = true;
-        }
-
-        $this->assertTrue($check);        
+        $this->assertStringContainsString($controller_name, $content);
+        $this->assertStringContainsString('public function index()', $content);
     }
 
     public function testMakeControllerCommandWithinDirectory()
@@ -59,7 +44,6 @@ class MakeControllerCommandTest extends TestCase
         $controller = 'Directory/TestController';
         $tmp  = explode('/', $controller);
         $controller_name = end($tmp);
-        $base_controller = config('settings.base_controller');
 
         $this->artisan('make:controller', ['name' => $controller])
         ->expectsOutput('Controller created successfully')
@@ -69,12 +53,6 @@ class MakeControllerCommandTest extends TestCase
 
         $content = File::get(config('settings.controllers_path')."/$controller.php");
         
-        $check = false;
-
-        if (strpos($content, $controller_name) !== false && strpos($content, $base_controller) !== false) {
-            $check = true;
-        }
-
-        $this->assertTrue($check);
+        $this->assertStringContainsString($controller_name, $content);
     }
 }
