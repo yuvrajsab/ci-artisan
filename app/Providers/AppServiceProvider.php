@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
             config('settings.models_path', $vars["application_folder"].'/models/');
             config('settings.migrations_path', $vars["application_folder"].'/migrations/');
             config('settings.tests_path', $vars["application_folder"].'/controllers/tests/');
+            config('settings.third_party_path', $vars["application_folder"].'/third_party/');
         } else {
             exit("'application' folder not found");
         }
