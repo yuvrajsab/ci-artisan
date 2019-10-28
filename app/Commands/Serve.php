@@ -31,24 +31,16 @@ class Serve extends Command
      */
     public function handle()
     {
-        // checking if anything available to serve
-        if (! File::exists(config('settings.entry_point'))) {
-            $this->error('no entry point');
-            return;
-        }
-
         $host = $this->option('host') ?? '127.0.0.1';
         $port = $this->option('port') ?? 8000;
 
-        $file = config('settings.entry_point');
-
         if ($this->option('host') != null || $this->option('port') != null) {
             $this->line("Codeigniter development server started: <http://$host:$port>");
-            shell_exec("php -S $host:$port $file");
+            shell_exec("php -S $host:$port");
         } else {
             for ($i=0; $i < 100; $i++) { 
                 $this->line("Codeigniter development server started: <http://$host:$port>");
-                shell_exec("php -S $host:$port $file");
+                shell_exec("php -S $host:$port");
                 $port++;
             }
         }
