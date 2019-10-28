@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         if (array_key_exists('application_folder', $vars)) {
             config('settings.controllers_path', $vars["application_folder"].'/controllers/');
             config('settings.models_path', $vars["application_folder"].'/models/');
+            config('settings.migrations_path', $vars["application_folder"].'/migrations/');
         } else {
             exit("'application' folder not found");
         }
