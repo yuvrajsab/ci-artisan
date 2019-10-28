@@ -35,15 +35,13 @@ class Controller extends Command
         $name = array_pop($argv);
 
         $path = config('settings.controllers_path');
-        for ($i=0; $i < sizeof($argv); $i++) {
-            if (! File::exists($path.'/'.$argv[$i])) {
-                File::makeDirectory($path.'/'.$argv[$i]);
+        foreach ($argv as $folder) {
+            if (! File::exists($path.$folder)) {
+                File::makeDirectory($path.$folder);
             }
-            $path .= '/'.$argv[$i];
+            $path .= $folder.'/';
         }
         
-        $base_controller = config('settings.base_controller');
-
         if ($this->option('resource')) {
             $content = File::get(base_path('stubs/controller/resource_controller_template.php'));
         } else {
@@ -51,9 +49,8 @@ class Controller extends Command
         }
 
         $content = str_replace('{$controller_name}', $name, $content);
-        $content = str_replace('{$base_controller}', $base_controller, $content);
-
-        $result = File::put($path.'/'.$name.'.php', $content);
+        
+        $result = File::put($path.$name.'.php', $content);
         if ($result) {
             $this->info("Controller created successfully");
         } else {
