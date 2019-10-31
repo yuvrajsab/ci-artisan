@@ -35,8 +35,17 @@ class AppServiceProvider extends ServiceProvider
             config('settings.migrations_path', $vars["application_folder"].'/migrations/');
             config('settings.tests_path', $vars["application_folder"].'/controllers/tests/');
             config('settings.third_party_path', $vars["application_folder"].'/third_party/');
+            config('settings.config_path', $vars["application_folder"].'/config/');
         } else {
             exit("'application' folder not found");
+        }
+
+        if (array_key_exists('view_folder', $vars)) {
+            if (! empty($vars["view_folder"])) {
+                config('settings.views_path', $vars["view_folder"]);
+            }
+        } else {
+            exit("'views' folder not found");
         }
     }
 
