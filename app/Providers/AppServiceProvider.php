@@ -14,11 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (! File::isFile(base_path(config('settings.entry_point')))) {
+        if (! File::isFile(config('settings.entry_point'))) {
             exit(config('settings.entry_point').' not found');
         }
 
-        $contents = File::get(base_path(config('settings.entry_point')));
+        $contents = File::get(config('settings.entry_point'));
 
         $matches = [];
         preg_match_all(

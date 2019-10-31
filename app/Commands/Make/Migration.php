@@ -39,10 +39,10 @@ class Migration extends Command
         }
 
         if ($this->option('create') !== null) {
-            $content = File::get(base_path('stubs/migration/create_table_migration_template.php'));            
+            $content = File::get('ci-artisan_stubs/migration/create_table_migration_template.php');            
             $content = str_replace('{$table_name}', strtolower($table_name), $content);
         } else {
-            $content = File::get(base_path('stubs/migration/simple_migration_template.php'));            
+            $content = File::get('ci-artisan_stubs/migration/simple_migration_template.php');            
         }
 
         $content = str_replace('{$migration_name}', ucfirst($name), $content);

@@ -43,9 +43,9 @@ class Controller extends Command
         }
         
         if ($this->option('resource')) {
-            $content = File::get(base_path('stubs/controller/resource_controller_template.php'));
+            $content = File::get('ci-artisan_stubs/controller/resource_controller_template.php');
         } else {
-            $content = File::get(base_path('stubs/controller/simple_controller_template.php'));
+            $content = File::get('ci-artisan_stubs/controller/simple_controller_template.php');
         }
 
         $content = str_replace('{$controller_name}', $name, $content);

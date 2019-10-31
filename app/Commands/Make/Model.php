@@ -41,7 +41,7 @@ class Model extends Command
             $path .= $folder.'/';
         }
         
-        $content = File::get(base_path('stubs/model/simple_model_template.php'));
+        $content = File::get('ci-artisan_stubs/model/simple_model_template.php');
         $content = str_replace('{$model_name}', $name, $content);
         
         $result = File::put($path.$name.'.php', $content);

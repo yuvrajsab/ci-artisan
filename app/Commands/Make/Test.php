@@ -46,7 +46,7 @@ class Test extends Command
             $path .= $folder.'/';
         }
         
-        $content = File::get(base_path('stubs/test/simple_unit_test_template.php'));
+        $content = File::get('ci-artisan_stubs/test/simple_unit_test_template.php');
         $content = str_replace('{$test_name}', $name, $content);
 
         $result = File::put($path.$name.'.php', $content);
