@@ -5,3 +5,12 @@
 /.env
 /.phpunit*
 /builds
+/application/config/dbConnect.php
+/application/controllers/*
+!/application/controllers/Welcome.php
+/application/migrations
+/application/models/*
+!/application/models/index.html
+/application/third_party/*
+/application/views/*
+!/application/views/index.html
